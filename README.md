@@ -2,7 +2,7 @@
 
 ## Como rodar o projeto na sua máquina:
 
-- Clone o projeto `git clone git@github.com:JuanSgarbi/teste-backend-byecar-juans.git`
+- Clone o projeto `git clone git@github.com:JuanSgarbi/desafio-backendjr-1.git`
 
 ## Abra o diretório BackEnd:
 
