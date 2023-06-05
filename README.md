@@ -7,6 +7,7 @@
 ## Abra o diretório BackEnd:
 
 - Rode `yarn install` - para instalar as dependências;
+- Renomeie o arquivo `.env.exemple` para `.env` e altere a variável de ambiente PORT para `PORT = 3001` - para configurar o acesso à rota;
 - Rode `yarn typeorm migration:run -d src/data-source.ts` - para realizar as migrações;
 - Rode `yarn dev` - para iniciar o servidor;
 - Pronto, o servidor estará rodando no localhost:3001!
