@@ -17,21 +17,34 @@ import { Header } from "../../components/header";
 import { useEffect, useState } from "react";
 import { useUser } from "../../context/user.context";
 import FormData from "form-data";
+import { useParams } from "react-router-dom";
+import { api } from "../../services";
 
-export const Home = () => {
+export const HomeSocial = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [listPeoples, setListPeoples] = useState<any>(null);
   const [counter, setCounter] = useState(0);
-  const { uploadCsv, getAllPeople, setPage, page } = useUser();
+  const { uploadCsv, getAllPeople, setPage, page, loginUser } = useUser();
+  const { id } = useParams();
 
   useEffect(() => {
     const allPeople = async () => {
       const peoples = await getAllPeople(page);
-      console.log(peoples);
 
       setListPeoples(peoples);
     };
     allPeople();
+
+    const getToken = async () => {
+      try {
+        const res = await api.get(`/api/user/${id.substring(5)}`);
+
+        loginUser({ email: res.data.email, password: res.data.nickname });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getToken();
   }, [counter, page]);
 
   const onSubmit = (event) => {

@@ -1,6 +1,0 @@
-node_modules
-.env
-yarn.lock
-dist
-db.sqlite
-uploads

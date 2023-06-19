@@ -7,20 +7,23 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  IconButton,
   Input,
   InputGroup,
   InputRightElement,
+  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { ILogin, useUser } from "../context/user.context";
+import { AiFillGithub } from "react-icons/ai";
 
 export const LoginForm = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const { loginUser } = useUser();
+  const { loginUser, socialLogin } = useUser();
 
   const formSchema = yup.object().shape({
     password: yup.string().required("Este campo é obrigatório"),
@@ -96,6 +99,17 @@ export const LoginForm = () => {
           </Button>
         </Flex>
       </form>
+      <Flex gap={2}>
+        <Text>Ou entrar com:</Text>
+        <Flex>
+          <IconButton
+            colorScheme="purple"
+            aria-label="Search database"
+            icon={<AiFillGithub />}
+            onClick={() => socialLogin()}
+          />
+        </Flex>
+      </Flex>
     </>
   );
 };

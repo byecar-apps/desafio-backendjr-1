@@ -18,6 +18,7 @@ interface IUserContext {
   getAllPeople: (current_page: number) => Promise<any>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
+  socialLogin: () => Promise<void>;
 }
 
 export interface ICreateUser {
@@ -42,25 +43,12 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
     "@TOKEN"
   )}`;
 
-  useEffect(() => {
-    const verifyLog = async () => {
-      try {
-        await api.get("/user/profile");
-        setIsLogged(true);
-        navigate("/home");
-      } catch (error) {
-        setIsLogged(false);
-        navigate("/");
-      }
-    };
-    verifyLog();
-  }, []);
-
   const loginUser = async (payload: ILogin) => {
     localStorage.clear();
     try {
-      const res = await api.post("/login", payload);
-      localStorage.setItem("@TOKEN", res.data.token);
+      const res = await api.post("/api/login", payload);
+
+      localStorage.setItem("@TOKEN", res.data.data.token);
       toast({
         title: "Login realizado!",
         status: "success",
@@ -84,6 +72,16 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
     }
   };
 
+  const socialLogin = async () => {
+    try {
+      const { data } = await api.get("/api/auth/redirect");
+      console.log(data);
+      window.location.href = data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const logout = () => {
     localStorage.clear();
     navigate("/");
@@ -92,7 +90,7 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const registerUser = async (payload: ICreateUser) => {
     try {
-      await api.post("/user", payload);
+      await api.post("/api/user", payload);
       toast({
         title: "Conta criada!",
         description: "Criamos uma conta para você.",
@@ -116,11 +114,7 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const uploadCsv = async (file: any) => {
     try {
-      await api.post("/people", file, {
-        headers: {
-          "Content-Type": `multipart/form-data`,
-        },
-      });
+      await api.post("/api/people", file);
       toast({
         title: "Dados enviados!",
         description: "Os dados do CSV foram enviados.",
@@ -145,7 +139,7 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const getAllPeople = async (current_page: number) => {
     try {
-      const { data } = await api.get(`/people?page=${current_page}`);
+      const { data } = await api.get(`/api/people`);
       return data;
     } catch (error) {}
   };
@@ -161,6 +155,7 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
         getAllPeople,
         setPage,
         page,
+        socialLogin,
       }}
     >
       {children}
