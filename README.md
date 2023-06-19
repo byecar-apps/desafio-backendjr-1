@@ -1,24 +1,53 @@
-# Desafio Backend Júnior
-Desafio para a vaga de backend júnior da byecar
+# Teste Backend BYeCAR - Juan Sgarbi
 
-## Objetivo
-Este desafio tem por objetivo compreender as formas como você resolve um determinado problema. De acordo com o seu conhecimento de ferramentas e tecnologia sua forma de resolver pode variar e ser mais ou menos detalhada. Não existe certo ou errado neste desafio, desde que o problema seja resolvido.
+## Como rodar o projeto na sua máquina:
 
-## Problema
-O departamento comercial demandou um acesso para integração com uma nova API de terceiros, onde teremos que importar uma planilha excel com alguns dados específicos, gravar em um banco de dados Mysql e disponibilizar esses dados através de uma API.
+- Clone o projeto `git clone git@github.com:JuanSgarbi/desafio-backendjr-1.git`
 
-Vamos precisar criar uma tela (para demonstração não precisa ter login e senha) com upload de um arquivo csv com um template pré-definido (em anexo) [desafio-backend.csv](https://github.com/byecar-apps/desafio-backendjr-1/files/11592627/desafio-backend.csv). Este arquivo foi gerado a partir do site (https://www.4devs.com.br/gerador_de_pessoas) e não representam dados reais ou de clientes da byecar.
+## Abra o diretório BackEnd:
 
-Será necessário disponibilizar um endpoint que permitirá a visualização dos dados em formato JSON de toda coleção disponível no banco de dados.
+- Rode `yarn install` - para instalar as dependências;
+- Renomeie o arquivo `.env.exemple` para `.env` e altere a variável de ambiente PORT para `PORT = 3001` - para configurar o acesso à rota;
+- Rode `yarn typeorm migration:run -d src/data-source.ts` - para realizar as migrações;
+- Rode `yarn dev` - para iniciar o servidor;
+- Pronto, o servidor estará rodando no localhost:3001!
+- Acesse o [link](https://juansgarbi.github.io/teste-byecar-doc/#req_5fe9126db0294291be13459f7e443769) para documentação ou [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Teste%20BYeCAR&uri=https%3A%2F%2Fraw.githubusercontent.com%2FJuanSgarbi%2Fteste-byecar-doc%2Fmain%2Fconfig.json)
 
-## Restrições tecnológicas
-* O front-end poderá ser construído em qualquer linguagem;
-* Não é obrigatório login e senha para este desafio;
-* O banco de dados utilizado para armazenar os dados deverá ser o Mysql (na falta de acesso ao Mysql, utilize SQLite);
-* O back-end (importação e API) deve ser criado utilizando: Laravel ou PHP puro ou NodeJS;
-* A disponibilização dos dados deverá ser uma API Rest que exige uma autenticação e autorização OAuth2.
+## Abra o diretório FrontEnd/teste-byecar:
 
-### Importante
-- Não se preocupe com telas ou qualquer outra estrutura que não envolva o processo acima;
-- Crie um fork deste repositório no github e envie o resultado para tiago[@]byecar.com.br em até 7 dias;
-- Se tiver dúvidas entre em contato comigo pelo Linkedin https://www.linkedin.com/in/tiago-sabadini/
+- Rode `yarn install`
+- Rode `yarn dev`
+- Pronto, o projeto irá abrir no navegador!
+
+## Bibliotecas utilizadas no Front End:
+
+- chakra-ui 
+- hookform/resolvers
+- axios
+- framer-motion
+- react-hook-form 
+- react-router-dom 
+- yup
+- react
+
+## Bibliotecas utilizadas no Back End
+
+- bcryptjs
+- cors
+- cross-env
+- crypto
+- csv-parser
+- dotenv
+- express
+- express-async-errors
+- jsonwebtoken
+- multer
+- reflect-metadata
+- sqlite3
+- ts-node
+- typeorm
+- yup
+
+## Autor:
+
+- [Juan Sgarbi](https://github.com/juansgarbi)
